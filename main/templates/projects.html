@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects - Portfolio{% endblock %}
+
+{% block content %}
+<section id="projects" class="py-5" style="min-height:100vh; position: relative; z-index: 1;">
+    <div class="container" data-aos="fade-up">
+        <div class="text-center mb-5">
+            <h2 class="display-4 fw-bold">My Projects</h2>
+            <p class="lead">Here are some of the projects I’ve worked on. Click on the cards for more details or to visit the live demo & GitHub repo.</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="text-center mb-4">
+            <button class="btn btn-outline-warning me-2 filter-btn active" data-filter="all">All</button>
+            <button class="btn btn-outline-warning me-2 filter-btn" data-filter="django">Django</button>
+            <button class="btn btn-outline-warning me-2 filter-btn" data-filter="js">JavaScript</button>
+            <button class="btn btn-outline-warning me-2 filter-btn" data-filter="python">Python</button>
+            <button class="btn btn-outline-warning me-2 filter-btn" data-filter="data">Data Analysis</button>
+            <button class="btn btn-outline-warning filter-btn" data-filter="ml">Machine Learning</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="row g-4" id="projects-grid">
+            {% for project in projects %}
+            <div class="col-md-6 col-lg-4 project-item" data-category="{{ project.category }}" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}00">
+                <div class="card shadow-lg h-100 tilt-card" data-tilt data-tilt-max="15" data-tilt-speed="400">
+                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ project.title }}</h5>
+                        <!-- <p class="card-text">{{ project.description }}</p> -->
+                        
+                        {% if project.github_link %}
+                        <a href="{{ project.github_link }}" target="_blank" class="btn btn-warning glow-btn me-2">GitHub</a>
+                        {% endif %}
+                        
+                        {% if project.live_demo %}
+                        <a href="{{ project.live_demo }}" target="_blank" class="btn btn-outline-warning glow-btn me-2">Live Demo</a>
+                        {% endif %}
+
+                        <!-- View More Button -->
+                        <a href="{% url 'project_detail' project.pk %}" class="btn btn-outline-warning glow-btn mt-2">View More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Filter Script -->
+<script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('.project-item');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter');
+
+            projects.forEach(project => {
+                if(filter === 'all' || project.getAttribute('data-category') === filter) {
+                    project.style.display = 'block';
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+<!-- VanillaTilt Init -->
+<script>
+    VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
+        max: 15,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+    });
+</script>
+{% endblock %}

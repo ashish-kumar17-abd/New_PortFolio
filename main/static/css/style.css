@@ -1,0 +1,248 @@
+/* ===== General ===== */
+body, html { 
+    margin:0; 
+    padding:0; 
+    font-family:'Poppins', sans-serif; 
+    scroll-behavior: smooth; 
+    background:#111; 
+    color:#fff; 
+}
+
+/* ===== Particles background ===== */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* ===== Navbar ===== */
+.navbar { 
+    background: rgba(0,0,0,0.8)!important; 
+    transition:0.3s; 
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.navbar.scrolled { 
+    background: rgba(0,0,0,0.95)!important; 
+    box-shadow:0 4px 15px rgba(0,0,0,0.5); 
+}
+.navbar .nav-link { 
+    position: relative; 
+    transition:0.3s; 
+}
+.navbar .nav-link::after { 
+    content:""; 
+    position:absolute; 
+    bottom:-5px; 
+    left:0; 
+    width:0%; 
+    height:2px; 
+    background:#ffc107; 
+    transition:0.3s; 
+}
+.navbar .nav-link:hover::after { width:100%; }
+.navbar .nav-link:hover { color:#ffc107 !important; }
+
+/* ===== Hero ===== */
+.hero h1 { animation: fadeInDown 1.2s ease; }
+.hero p { animation: fadeInUp 1.2s ease 0.3s both; }
+.glow-btn { transition: all 0.3s ease; position: relative; z-index:2; }
+.glow-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px #ffc107, 0 0 30px #ffc107; }
+
+/* ===== Avatar ===== */
+.avatar { 
+    width:150px; 
+    border-radius:50%; 
+    margin-top:20px; 
+    transition: transform 0.5s ease, box-shadow 0.5s ease; 
+}
+.avatar:hover { 
+    transform: translateY(-10px) scale(1.05); 
+    box-shadow:0 15px 30px rgba(255,193,7,0.5); 
+}
+
+/* ===== About ===== */
+#about img { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+#about img:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 0px 8px 20px rgba(255,193,7,0.4); }
+
+/* ===== Projects ===== */
+.card { border-radius:15px; transition:0.4s; overflow:hidden; }
+.card:hover { transform: translateY(-10px); box-shadow:0 15px 25px rgba(0,0,0,0.3); }
+.card img { transition: transform 0.5s ease; }
+.card:hover img { transform: scale(1.1); }
+
+/* ===== Contact ===== */
+#contact input,#contact textarea { border-radius:10px; border:2px solid #ddd; padding:10px; transition:0.3s; }
+#contact input:focus,#contact textarea:focus { border:2px solid #ffc107; box-shadow:0 0 8px rgba(255,193,7,0.6); outline:none; }
+#contact button { border-radius:10px; background:#ffc107; border:none; padding:10px 20px; transition:0.3s; }
+#contact button:hover { transform: scale(1.05); background:#e0a800; color:#fff; }
+
+/* ===== Footer ===== */
+footer { background:#111 !important; animation: fadeInUp 1s ease; }
+
+/* ===== Back to top button ===== */
+#back-to-top { 
+    display:none; 
+    position:fixed; 
+    bottom:30px; 
+    right:30px; 
+    z-index:999; 
+    background:#ffc107; 
+    color:#111; 
+    border:none; 
+    padding:10px 15px; 
+    border-radius:50%; 
+    font-size:18px; 
+    cursor:pointer; 
+    transition:0.3s; 
+}
+#back-to-top:hover { background:#e0a800; transform:scale(1.1); }
+
+/* ===== Animations ===== */
+@keyframes fadeInDown { from{opacity:0;transform:translateY(-40px);} to{opacity:1;transform:translateY(0);} }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:translateY(0);} }
+@keyframes zoomIn { from{opacity:0;transform:scale(0.8);} to{opacity:1;transform:scale(1);} }
+
+/* ===== Ensure main content above particles ===== */
+main, section { position: relative; z-index: 1; }
+
+
+
+
+
+/* About section ka css */
+/* Base fix for particles + content layers */
+/* Avatar Glow */
+.avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar {
+    width: 150px;
+    border-radius: 50%;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    z-index: 2; /* above glow */
+}
+
+.avatar:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(255,193,7,0.5);
+}
+
+.avatar-glow {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,193,7,0.5), transparent);
+    z-index: 1; /* below avatar */
+    animation: pulseGlow 2.5s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.9; }
+}
+
+/* Glow Button */
+.glow-btn {
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+.glow-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ffc107, 0 0 40px #ffc107;
+}
+
+/* Floating shapes */
+.floating-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.2;
+}
+.shape1 {
+    width: 80px;
+    height: 80px;
+    background: #ffc107;
+    top: 20%;
+    left: 5%;
+    animation: floatUpDown 6s ease-in-out infinite;
+}
+.shape2 {
+    width: 50px;
+    height: 50px;
+    background: #ff5722;
+    top: 70%;
+    left: 80%;
+    animation: floatUpDown 5s ease-in-out infinite;
+}
+.shape3 {
+    width: 100px;
+    height: 100px;
+    background: #00bcd4;
+    top: 50%;
+    left: 50%;
+    animation: floatUpDown 7s ease-in-out infinite;
+}
+@keyframes floatUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Ensure content above particles */
+main, section {
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Avatar upar shift */
+.about-avatar {
+    margin-top: -40px; /* Desktop ke liye */
+}
+
+/* Mobile ke liye responsive adjustment */
+@media (max-width: 768px) {
+    .about-avatar {
+        margin-top: -20px;
+    }
+}
+
+/* Extra Styling (optional) */
+.avatar {
+    border-radius: 50%; /* Circle shape */
+    border: 4px solid #ffc107; /* Yellow border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 193, 7, 0.7);
+}
+
+.avatar-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(255,193,7,0.4) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    border-radius: 50%;
+}

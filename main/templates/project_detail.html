@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %} {# for splitting sentences into bullets #}
+
+{% block title %}{{ project.title }} - Portfolio{% endblock %}
+
+{% block content %}
+<section id="project-detail" class="py-5 position-relative" style="min-height:100vh; z-index:1;">
+    <div class="container" data-aos="fade-up">
+
+        <!-- Header -->
+        <div class="text-center mb-5" data-aos="fade-down" data-aos-duration="1000">
+            <h2 class="display-4 fw-bold text-warning">{{ project.title }}</h2>
+            <p class="text-muted fs-5">A detailed look at this project, including the tech stack, live demo, and GitHub
+                repository.</p>
+        </div>
+
+        <div class="row g-5 align-items-center">
+
+            <!-- Project Image -->
+            <div class="col-lg-6" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="shadow-lg rounded overflow-hidden border border-warning border-2">
+                    <img src="{{ project.image.url }}" class="img-fluid" alt="{{ project.title }}">
+                </div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+
+                <!-- Description as bullet points -->
+                <div class="project-description p-4 rounded shadow-lg mb-5 position-relative overflow-hidden"
+                    style="background: linear-gradient(135deg, rgba(40,40,40,0.95), rgba(20,20,20,0.95)); border-left: 5px solid #FFC107;">
+                    <h5 class="fw-bold text-warning mb-3">Project Description</h5>
+                    <ul class="list-unstyled mb-0">
+                        {% for sentence in project.description|split_sentences %}
+                        <li class="text-light mb-2">• {{ sentence }}.</li>
+                        {% endfor %}
+                    </ul>
+                    <span class="decorative-circle position-absolute"
+                        style="width: 100px; height: 100px; background: rgba(255,193,7,0.2); border-radius: 50%; top: -30px; right: -30px;"></span>
+                </div>
+
+
+
+                <!-- Buttons -->
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank" class="btn btn-warning glow-btn px-4">GitHub</a>
+                    {% endif %}
+                    {% if project.live_demo %}
+                    <a href="{{ project.live_demo }}" target="_blank" class="btn btn-outline-warning glow-btn px-4">Live
+                        Demo</a>
+                    {% endif %}
+                    <a href="{% url 'projects' %}" class="btn btn-secondary px-4">Back</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- AOS Animation Init -->
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+</script>
+
+<!-- Optional Hover and Fade-in Animation -->
+<style>
+    .project-description {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-description:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(255, 193, 7, 0.4);
+    }
+
+    /* Fade-in animation for bullet points */
+    .description-list li {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInUp 0.5s forwards;
+    }
+
+    .description-list li:nth-child(1) {
+        animation-delay: 0.2s;
+    }
+
+    .description-list li:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+
+    .description-list li:nth-child(3) {
+        animation-delay: 0.6s;
+    }
+
+    .description-list li:nth-child(4) {
+        animation-delay: 0.8s;
+    }
+
+    /* Add more if needed */
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Button hover glow */
+    .glow-btn:hover {
+        box-shadow: 0 0 15px #ffc107, 0 0 25px #ffc107;
+        transform: translateY(-2px);
+        transition: 0.3s ease-in-out;
+    }
+</style>
+{% endblock %}

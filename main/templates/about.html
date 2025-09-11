@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About - Portfolio{% endblock %}
+
+{% block content %}
+<section id="about" class="py-5 position-relative" style="min-height:100vh; color:white; z-index:1;">
+    <div class="container position-relative" style="z-index:2;">
+        <div class="row align-items-center">
+            <!-- Left: Avatar -->
+            <div class="col-md-5 text-center mb-4 about-avatar" data-aos="fade-right" data-aos-duration="1200">
+                <div class="avatar-wrapper position-relative d-inline-block">
+                    <img src="{% static 'images/avatar.jpg' %}" alt="Ashish Kumar" class="avatar img-fluid shadow-lg" data-tilt>
+                    <span class="avatar-glow"></span>
+                </div>
+            </div>
+
+            <!-- Right: Texts -->
+            <div class="col-md-7" data-aos="fade-left" data-aos-duration="1200">
+                <h2 class="mb-3 display-5 fw-bold text-warning">About Me</h2>
+                <p class="lead mb-3" style="line-height:1.8; text-shadow: 0 0 5px #000;">
+                    Hi! I am <span class="text-warning fw-bold">Ashish Kumar</span>, a passionate BCA student and web developer from Dehradun, Uttarakhand. I have always been fascinated by how technology can solve real-world problems. Over the past few years, I have honed my skills in <span class="text-warning">Django</span>, <span class="text-warning">Bootstrap</span>, <span class="text-warning">JavaScript</span>, <span class="text-warning">Python</span>, and <span class="text-warning">problem-solving with DSA</span>.
+                </p>
+
+                <h4 class="text-warning mt-4 mb-2">Skills & Expertise</h4>
+                <ul style="line-height:1.6; text-shadow: 0 0 3px #000;">
+                    <li>Web Development: Django, Bootstrap, HTML, CSS, JavaScript</li>
+                    <li>Backend & Databases: Python, MySQL</li>
+                    <li>Problem Solving & DSA: Arrays, Linked Lists, Recursion, Sorting Algorithms</li>
+                    <li>Tools: VS Code, Git/GitHub, Postman</li>
+                    <li>UI/UX Design: Creating interactive and modern interfaces</li>
+                </ul>
+
+                <h4 class="text-warning mt-4 mb-2">Experience & Projects</h4>
+                <p style="text-shadow: 0 0 3px #000;">
+                    I have built multiple web projects including:
+                </p>
+                <ul style="line-height:1.6; text-shadow: 0 0 3px #000;">
+                    <li>Shopping website with Django & Bootstrap</li>
+                    <li>Spotify-like music clone</li>
+                    <li>Personal blog website</li>
+                    <li>College ERP system with multiple apps (Students, Courses, Teachers, Attendance, Results)</li>
+                </ul>
+
+                <h4 class="text-warning mt-4 mb-2">Hobbies & Interests</h4>
+                <p style="text-shadow: 0 0 3px #000;">
+                    I love <span class="text-warning">cricket</span>, problem-solving with coding challenges, exploring new technologies, and building innovative projects. I am always eager to learn and experiment with new frameworks and tools.
+                </p>
+
+                <h4 class="text-warning mt-4 mb-2">Fun Facts</h4>
+                <ul style="line-height:1.6; text-shadow: 0 0 3px #000;">
+                    <li>Can spend hours solving complex DSA problems for fun 😎</li>
+                    <li>Love designing interactive and animated UI interfaces</li>
+                    <li>Always experimenting with colors, shadows, and effects in web apps</li>
+                </ul>
+
+                <a href="{% url 'contact' %}" class="btn btn-warning btn-lg glow-btn shadow mt-4">Contact Me</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating shapes behind content -->
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
+</section>
+{% endblock %}
